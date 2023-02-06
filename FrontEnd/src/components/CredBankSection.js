@@ -18,7 +18,7 @@ function CreBankSection({ state, setState }) {
       const data = await response.json();
       console.log(data);
       if (data.status) {
-        setState({ id: account_id, credits: value });
+        setState({ id: account_id, credits: value, checkID: data.checkID });
       }
     } catch (error) {
       console.log(error);
@@ -31,7 +31,7 @@ function CreBankSection({ state, setState }) {
       alert("Please fill the form!");
       return;
     }
-    console.log(form.account_id, form.value);
+
     asyncGetCheque(form.account_id, 10);
   };
 
@@ -48,10 +48,8 @@ function CreBankSection({ state, setState }) {
             <label>Account ID</label>
             <input value={form.account_id} onChange={handleChange} type="text" id="account_id" name="account_id" placeholder="Your Account ID.." />
 
-            {/*  <label>Value</label>
-            <input value={form.value} onChange={handleChange} type="number" id="value" name="value" placeholder="Insert an amount" /> */}
-
             <div id="json"></div>
+
             <button type="submit">Submit</button>
           </form>
         </div>

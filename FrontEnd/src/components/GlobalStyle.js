@@ -26,6 +26,8 @@ const GlobalStyle = createGlobalStyle`
     background: transparent;
     color: white;
     transition: all 0.5s ease;
+        margin: 1rem 1rem;
+
   }
   h2{
     font-weight: 700;

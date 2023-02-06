@@ -42,6 +42,35 @@ function EuroMilRegisterSection({ state, setState }) {
     });
   }
 
+  const submitEuroMil = async (checkid, balls, stars) => {
+    if (!checkid || !balls || !stars) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/euromil`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          checkid: checkid,
+          key: balls.join("-") + "-" + stars.join("-"),
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (data.status) {
+        //setState({ id: account_id, credits: value, checkID: data.checkID });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    //clear state setState({id: "", credits: "", checkID: ""})
+  };
+
   return (
     <section className="sect3" id="contact">
       <div className="container-fluid">
@@ -66,6 +95,7 @@ function EuroMilRegisterSection({ state, setState }) {
           </div>
 
           <button onClick={getRandomNumArr}>Generate random key</button>
+          <button onClick={() => submitEuroMil(state.checkID, numbers.nums, numbers.numsStar)}>Submit EuroMillions</button>
         </div>
       </div>
     </section>

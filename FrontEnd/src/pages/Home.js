@@ -8,6 +8,7 @@ function Home() {
   const [state, setState] = useState({
     id: "",
     credits: "",
+    checkID: "",
   });
 
   return (

@@ -9,12 +9,13 @@ const client = new euromilPackage.Euromil("localhost:50051", grpc.credentials.cr
 
 class Controller {
   async grpcRequest(req, res) {
+    const { key, checkid } = req.body;
     let data = { message: `Something went wrong.` };
     let responseCode = 400;
 
-    client.RegisterEuroMil({ key: "123", checkid: "################" }, (err, response) => {
+    client.RegisterEuroMil({ key, checkid }, (err, response) => {
       if (response) {
-        console.log(`Server returned the following object:`, JSON.stringify(response));
+        console.log(`gRPC Server returned the following object:`, JSON.stringify(response));
         console.log(response.message);
       } else {
         console.log(err);
