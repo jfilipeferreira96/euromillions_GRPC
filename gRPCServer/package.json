@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.1",
+    "@grpc/proto-loader": "^0.7.4",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "moment": "^2.29.4"
+  },
+  "scripts": {
+    "client": "node ./client.js",
+    "server": "node ./server.js"
+  }
+}
