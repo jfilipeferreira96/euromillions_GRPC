@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const StyledNav = styled.nav`
   display: flex;
-  justify-content:space-between; 
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #17456f; 
+  background: #17456f;
 
   a {
     color: white;
@@ -20,19 +20,19 @@ const StyledNav = styled.nav`
 
   ul {
     display: flex;
-    list-style: none; 
+    list-style: none;
   }
 
   li {
-    padding-left: 1rem; 
+    padding-left: 1rem;
   }
 
   @media only screen and (max-width: 600px) {
     flex-direction: column;
-  } 
+  }
 `;
 
-function Nav() {
+function Nav({ state }) {
   return (
     <StyledNav>
       <h1>
@@ -41,8 +41,8 @@ function Nav() {
         </a>
       </h1>
       <div>
-        <h3>Account: </h3>
-        <h3>Credits: </h3>
+        <h3>Account: {state.id} </h3>
+        <h3>Credits: {state.credits} </h3>
       </div>
     </StyledNav>
   );

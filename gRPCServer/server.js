@@ -10,21 +10,23 @@ const server = new grpc.Server();
 // Add the service
 server.addService(euromilPackage.Euromil.service, {
   RegisterEuroMil: RegisterEuroMil,
-}); 
+});
 
 server.bindAsync("0.0.0.0:50051", grpc.ServerCredentials.createInsecure(), () => {
   console.log("Server running at http://127.0.0.1:50051");
   server.start();
-}); 
+});
 
-function RegisterEuroMil(call, callback){
-  const {key, checkid} = call.request;
-  
-  let message = 'Failed to register Euromil';
-  if (key && checkid.length == 16)
-  {
-    message = 'Euromil was registered with success'
+function RegisterEuroMil(call, callback) {
+  const { key, checkid } = call.request;
+
+  let message = "Failed to register Euromil";
+  let status = false;
+
+  if (key && checkid.length == 16) {
+    message = "Euromil was registered with success";
+    status = true;
   }
 
-  callback(null, {message: message});
+  callback(null, { message: message, status: status });
 }

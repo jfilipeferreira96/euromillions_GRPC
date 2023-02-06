@@ -26,10 +26,6 @@ const GlobalStyle = createGlobalStyle`
     background: transparent;
     color: white;
     transition: all 0.5s ease;
-    &:hover {
-      background: #df9d2d;
-      color: white;
-    }
   }
   h2{
     font-weight: 700;
@@ -174,6 +170,59 @@ const GlobalStyle = createGlobalStyle`
     border: 1px solid #caccce;
     border-radius: 50%;
     box-shadow: 1px 1px 5px -1px rgb(202 204 206 / 60%);
+  }
+
+  .five-pointed-star {
+    --star-color:orange;
+    margin: 2.5rem 0.5rem 2.5rem 0.5rem;
+    font-size:2.5em;
+    position: relative;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-right: 1em solid transparent;
+    border-bottom: 0.7em solid var(--star-color);
+    border-left: 1em solid transparent;
+    transform: rotate(35deg);
+
+      div{
+        rotate: 325deg;
+        position: absolute;
+        z-index:2;
+        margin-left: -16px;
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: .05rem;
+        color: #212121;
+      }
+  }
+  .five-pointed-star:before {
+    border-bottom: 0.8em solid var(--star-color);
+    border-left: 0.3em solid transparent;
+    border-right: 0.3em solid transparent;
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -0.45em;
+    left: -0.65em;
+    display: block;
+    content:"";
+    transform: rotate(-35deg);
+  }
+  .five-pointed-star:after {
+    position: absolute;
+    display: block;
+    top: 0.03em;
+    left: -1.05em;
+    width: 0;
+    height: 0;
+    border-right: 1em solid transparent;
+    border-bottom: 0.7em solid var(--star-color);
+    border-left: 1em solid transparent;
+    transform: rotate(-70deg);
+    content:"";
   }
 `;
 export default GlobalStyle;

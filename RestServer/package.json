@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "grpcclient": "node src/client.js",
-    "grpcserver": "node src/server.js"
+    "grpcclient": "node src/client.js"
   },
   "keywords": [],
   "author": "",

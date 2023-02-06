@@ -4,22 +4,17 @@ import CredBankSection from "../components/CredBankSection";
 import EuroMilRegisterSection from "../components/EuroMilRegisterSection";
 import Nav from "../components/Nav";
 
-function Home(){
+function Home() {
   const [state, setState] = useState({
     id: "",
-    credits:0
+    credits: "",
   });
-  
- /*  const { data, loading } = useFetch(
-    'https://jsonplaceholder.typicode.com/posts',
-    {}
-  ) */
 
   return (
     <>
-      <Nav />
-      {!state.id &&<CredBankSection state={state} setState={setState} />}
-      {state.id &&<EuroMilRegisterSection state={state} setState={setState} /> }
+      <Nav state={state} />
+      {!state.id && <CredBankSection state={state} setState={setState} />}
+      {state.id && <EuroMilRegisterSection state={state} setState={setState} />}
     </>
   );
 }
