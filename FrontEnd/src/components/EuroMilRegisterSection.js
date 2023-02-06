@@ -1,7 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
-function EuroMilRegisterSection() {
+function EuroMilRegisterSection({state, setState}) {
+  
+  const [numbers, setNumbers] = useState({
+      nums: Array.from({length: 5}),
+      numsStar: Array.from({length: 2})
+  });
+
+  function getRandomNum(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  
+  function getRandomNumArr() {
+    let arrNums = [];
+    let arrNumsStar = [];
+
+    // Ball Numbers
+    while (arrNums.length < 5) {
+      let randNum = getRandomNum(1,50);
+      if(arrNums.indexOf(randNum) === -1){
+        arrNums.push(randNum);
+      }
+    }
+
+    // Stars Numbers
+    while (arrNumsStar.length < 2) {
+      let randNumStar = getRandomNum(1,12);
+      if(arrNumsStar.indexOf(randNumStar) === -1){
+        arrNumsStar.push(randNumStar);
+      }
+    }
+
+    // Sort the numbers from lowest to highest
+    setNumbers({
+      nums: arrNums.sort(function (a, b) { return a - b }),
+      numsStar: arrNumsStar.sort(function (a, b) { return a - b }),
+    });
+  }
+
+  console.log(numbers);
   return (
     <section className="sect3" id="contact">
       <div className="container-fluid">
@@ -12,23 +50,24 @@ function EuroMilRegisterSection() {
             src="https://www.carnivallotto.com/assets/euromillions/_resampled/ScaleWidthWzI4M10/splash.png"
             alt="lottery_png"
           />
-          <div className="json"></div>
 
-          <form id="formCheque" method="get">
-            <label>Account ID</label>
-            <input
-              type="text"
-              id="credit_account_id"
-              name="credit_account_id"
-              placeholder="Your Account ID.."
-            />
+          <div className="ballcontainer">
+            {numbers.nums.map((number) => 
+              <div className="ball" key={number}>
+                {number}
+              </div>
+            )}
+          </div>
+          <div className="ballcontainer">
+            {numbers.numsStar.map((star) => 
+              <div className="ball" key={star}>
+                {star}
+              </div>
+            )}
+          </div>
 
-            <label>Value</label>
-            <input type="number" id="value" name="value" placeholder="Insert an amount" />
 
-            <div id="json"></div>
-            <button type="submit">Submit</button>
-          </form>
+          <button onClick={getRandomNumArr}>Chave aleatória</button>
         </div>
       </div>
     </section>

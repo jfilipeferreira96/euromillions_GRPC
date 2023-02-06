@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function CreBankSection() {
+function CreBankSection({state, setState}) {
   return (
     <section className="sect3" id="contact">
       <div className="container-fluid">

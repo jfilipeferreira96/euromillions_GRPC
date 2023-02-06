@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     color: white;
     transition: all 0.5s ease;
     &:hover {
-      background: #23d997;
+      background: #df9d2d;
       color: white;
     }
   }
@@ -153,5 +153,27 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 600;
   }
 
+  .ballcontainer {
+    grid-column: content-start / content-end;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ball {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: .05rem;
+    color: #212121;
+    background-color: #fff;
+    border: 1px solid #caccce;
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px -1px rgb(202 204 206 / 60%);
+  }
 `;
 export default GlobalStyle;
