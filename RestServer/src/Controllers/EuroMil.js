@@ -1,30 +1,27 @@
-const grpc = require("@grpc/grpc-js");
-const protoLoader = require("@grpc/proto-loader");
+const caller = require('grpc-caller')
 const PROTO_PATH = "./src/proto/registerEuroMil.proto";
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {});
-
-const euromilPackage = grpc.loadPackageDefinition(packageDefinition).euromil;
-
-const client = new euromilPackage.Euromil("localhost:50051", grpc.credentials.createInsecure());
+const client = caller('localhost:50051', PROTO_PATH, "Euromil");
 
 class Controller {
-  async grpcRequest(req, res) {
+  
+  async grpcRequest(req, res){
     const { key, checkid } = req.body;
     let data = { message: `Something went wrong.` };
     let responseCode = 400;
 
-    console.log(`Sent to gRPC server the following object:`, JSON.stringify({ key, checkid }));
-    const x = await client.RegisterEuroMil({ key, checkid }, (err, response) => {
-      if (response) {
-        console.log(`gRPC Server returned the following object:`, JSON.stringify(response));
-        
+    try{
+      console.log(`Sent to gRPC server the following object:`, JSON.stringify({ key, checkid }));
+      const response = await client.RegisterEuroMil({ key: "123", checkid: "################" })
+      if (response)
+      {
+        console.log(`Server returned the following object:`, JSON.stringify(response));
+        data = response;
         responseCode = 200;
-        data.message = response.message;
-      } else {
-        console.log(err);
-      }
-    });
-    console.log("caralhoooooooo", x)
+      } 
+    } catch (error) {
+      console.log(error)
+    }
+
     res.status(responseCode).json(data);
   }
 }
