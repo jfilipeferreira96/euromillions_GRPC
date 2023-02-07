@@ -17,12 +17,33 @@ server.bindAsync("0.0.0.0:50051", grpc.ServerCredentials.createInsecure(), () =>
   server.start();
 });
 
+function areNumbersUniqueAndBelowLimit(array, limit) {
+  let uniqueNumbers = new Set(array);
+  return uniqueNumbers.size === array.length && Math.max(...array) < limit;
+}
+
 function RegisterEuroMil(call, callback) {
   const { key, checkid } = call.request;
 
   let message = "Failed to register Euromil";
-  
-  if (key && key.split("-").length == 7 && checkid.length == 16) {
+
+  const checkEuroMilKey = (key) => {
+    message = "Invalid Euromillions key";
+
+    if (key.length !== 7) {
+      return false;
+    }
+    let numbers = key.slice(0, 5);
+    let stars = key.slice(5);
+
+    if (!areNumbersUniqueAndBelowLimit(numbers, 50) || !areNumbersUniqueAndBelowLimit(stars, 10)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  if (checkEuroMilKey(key.split("-")) && checkid.length == 16) {
     message = "Euromil was registered with success";
   }
 

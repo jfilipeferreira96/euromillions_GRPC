@@ -29,6 +29,14 @@ const GlobalStyle = createGlobalStyle`
         margin: 1rem 1rem;
 
   }
+
+  .buttonred{
+    background-color: #830e15;
+  }
+  .buttongreen{
+    background-color:#114c16;
+  }
+
   h2{
     font-weight: 700;
     font-size: 4rem;

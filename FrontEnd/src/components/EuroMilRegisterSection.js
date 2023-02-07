@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal);
 
 function EuroMilRegisterSection({ state, setState }) {
   const [numbers, setNumbers] = useState({
@@ -14,7 +14,7 @@ function EuroMilRegisterSection({ state, setState }) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  function getRandomNumArr() {
+  function getRandomValidNumArr() {
     let arrNums = [];
     let arrNumsStar = [];
 
@@ -32,6 +32,34 @@ function EuroMilRegisterSection({ state, setState }) {
       if (arrNumsStar.indexOf(randNumStar) === -1) {
         arrNumsStar.push(randNumStar);
       }
+    }
+
+    // Sort the numbers from lowest to highest
+    setNumbers({
+      nums: arrNums.sort(function (a, b) {
+        return a - b;
+      }),
+      numsStar: arrNumsStar.sort(function (a, b) {
+        return a - b;
+      }),
+    });
+  }
+
+  function getRandomInvalidNumArr() {
+    let arrNums = [];
+    let arrNumsStar = [];
+
+    // Ball Numbers
+    while (arrNums.length < 5) {
+      let randNum = getRandomNum(1, 5);
+      arrNums.push(randNum);
+    }
+
+    // Stars Numbers
+    while (arrNumsStar.length < 1) {
+      let randNumStar = getRandomNum(1, 12);
+      arrNumsStar.push(randNumStar);
+      arrNumsStar.push(randNumStar);
     }
 
     // Sort the numbers from lowest to highest
@@ -63,22 +91,18 @@ function EuroMilRegisterSection({ state, setState }) {
         }),
       });
       const data = await response.json();
-      
-      if (data.message !== "Euromil was registered with success") {   
-        
-        MySwal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: data.message
-        })
 
+      if (data.message !== "Euromil was registered with success") {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: data.message,
+        });
       } else {
-        
-        MySwal.fire('Success!', data.message,'success').then(() => {
+        MySwal.fire("Success!", data.message, "success").then(() => {
           setState({ id: "", credits: "", checkID: "" });
-        })
+        });
       }
-     
     } catch (error) {
       console.log(error);
     }
@@ -109,7 +133,15 @@ function EuroMilRegisterSection({ state, setState }) {
             ))}
           </div>
 
-          <button onClick={getRandomNumArr}>Generate random key</button>
+          <div>
+            <button className="buttonred" onClick={getRandomInvalidNumArr}>
+              Generate an INVALID key
+            </button>
+            <button className="buttongreen" onClick={getRandomValidNumArr}>
+              Generate a VALID key
+            </button>
+          </div>
+
           <button onClick={() => submitEuroMil(state.checkID, numbers.nums, numbers.numsStar)}>Submit EuroMillions</button>
         </div>
       </div>
