@@ -13,15 +13,18 @@ class Controller {
     let data = { message: `Something went wrong.` };
     let responseCode = 400;
 
-    client.RegisterEuroMil({ key, checkid }, (err, response) => {
+    console.log(`Sent to gRPC server the following object:`, JSON.stringify({ key, checkid }));
+    const x = await client.RegisterEuroMil({ key, checkid }, (err, response) => {
       if (response) {
         console.log(`gRPC Server returned the following object:`, JSON.stringify(response));
-        console.log(response.message);
+        
+        responseCode = 200;
+        data.message = response.message;
       } else {
         console.log(err);
       }
     });
-
+    console.log("caralhoooooooo", x)
     res.status(responseCode).json(data);
   }
 }

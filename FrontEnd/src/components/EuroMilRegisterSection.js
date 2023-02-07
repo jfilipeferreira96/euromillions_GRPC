@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 function EuroMilRegisterSection({ state, setState }) {
   const [numbers, setNumbers] = useState({
@@ -60,10 +63,22 @@ function EuroMilRegisterSection({ state, setState }) {
         }),
       });
       const data = await response.json();
-      console.log(data);
-      if (data.status) {
-        //setState({ id: account_id, credits: value, checkID: data.checkID });
+      
+      if (data.message !== "Euromil was registered with success") {   
+        
+        MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: data.message
+        })
+
+      } else {
+        
+        MySwal.fire('Success!', data.message,'success').then(() => {
+          setState({ id: "", credits: "", checkID: "" });
+        })
       }
+     
     } catch (error) {
       console.log(error);
     }

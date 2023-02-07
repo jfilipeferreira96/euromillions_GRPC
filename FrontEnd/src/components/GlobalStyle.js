@@ -191,7 +191,7 @@ const GlobalStyle = createGlobalStyle`
         rotate: 325deg;
         position: absolute;
         z-index:2;
-        margin-left: -16px;
+        margin-left: -20px;
         width: 3.5rem;
         height: 3.5rem;
         font-size: 1.6rem;
@@ -225,6 +225,14 @@ const GlobalStyle = createGlobalStyle`
     border-left: 1em solid transparent;
     transform: rotate(-70deg);
     content:"";
+  }
+  .swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #09253e!important;
+    color: #fff;
+    font-size: 1em;
   }
 `;
 export default GlobalStyle;

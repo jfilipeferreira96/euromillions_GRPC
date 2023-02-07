@@ -10,6 +10,6 @@
   },
   "scripts": {
     "client": "node ./client.js",
-    "server": "node ./server.js"
+    "start": "node ./server.js"
   }
 }
