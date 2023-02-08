@@ -46,7 +46,7 @@ function CreBankSection({ state, setState }) {
 
           <form id="formCheque" onSubmit={handleSubmit}>
             <label>Account ID</label>
-            <input value={form.account_id} onChange={handleChange} type="text" id="account_id" name="account_id" placeholder="Your Account ID.." />
+            <input value={form.account_id} onChange={handleChange} type="text" id="account_id" name="account_id" placeholder="Your Account ID.." autoComplete="off" />
 
             <div id="json"></div>
 

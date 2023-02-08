@@ -36,7 +36,7 @@ function RegisterEuroMil(call, callback) {
     let numbers = key.slice(0, 5);
     let stars = key.slice(5);
 
-    if (!areNumbersUniqueAndBelowLimit(numbers, 50) || !areNumbersUniqueAndBelowLimit(stars, 10)) {
+    if (!areNumbersUniqueAndBelowLimit(numbers, 50) || !areNumbersUniqueAndBelowLimit(stars, 12)) {
       return false;
     }
 
